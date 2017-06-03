@@ -2,13 +2,43 @@ var redux = require('redux');
 
 console.log('Starting redux example');
 
+var stateDefault = {
+    name: 'Anonymous',
+    hobbies: [],
+    movies: []
+};
+var nextHobbyID = 1;
+var nextMovieID = 1;
 
-var reducer = (state = {name: 'anonymous'}, action) => {
+var reducer = (state = stateDefault, action) => {
     switch(action.type){
         case 'CHANGE_NAME':
             return{
                 ...state,
                 name: action.name
+            };
+        case 'ADD_HOBBIES':
+            return{
+                ...state,
+               hobbies: [
+                   ...state.hobbies, 
+                   {
+                       id: nextHobbyID++,
+                       hobby: action.hobby
+                   }
+               ]
+            };
+        case 'ADD_MOVIE':
+            return{
+                ...state,
+               movies: [
+                   ...state.movies, 
+                   {
+                       id: nextMovieID++,
+                       title: action.title,
+                       genre: action.genre
+                   }
+               ]
             };
             default:
             return state;
@@ -19,15 +49,14 @@ var store = redux.createStore(reducer, redux.compose(
     window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
 
-// Subscribe to change
 var unsubscribe = store.subscribe(() => {
     var state = store.getState();
 
     console.log('Name is', state.name);
     document.getElementById('app').innerHTML = state.name;
-});
-// unsubscribe();
 
+    console.log('New State', store.getState());
+});
 var currentState = store.getState();
 
 console.log('currentState', currentState);
@@ -37,11 +66,20 @@ store.dispatch({
     name: 'Andrew'
 });
 
-
+store.dispatch({
+    type: 'ADD_HOBBIES',
+    hobby: 'Running'
+})
 
 store.dispatch({
     type: 'CHANGE_NAME',
     name: 'Faza'
+});
+
+store.dispatch({
+    type: 'ADD_MOVIE',
+    title: 'Mad Max',
+    genre: 'action'
 });
 
 // console.log('Name Should be andrew', store.getState());
