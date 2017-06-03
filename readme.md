@@ -33,3 +33,7 @@ Git
 1. git remote -v
 2. git remote rm -origin
 3. git remote -v
+
+Documentation:
+
+1. ini untuk mengetahui lokasi IP : 'https://ipinfo.io/'
