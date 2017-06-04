@@ -26,6 +26,7 @@
 Install:
 
 1. redux@3.3.1 --save-dev
+2. redux-thunk@2.0.1 --save-dev
 
 
 Git
@@ -36,4 +37,4 @@ Git
 
 Documentation:
 
-1. ini untuk mengetahui lokasi IP : 'https://ipinfo.io/'
+1. ini untuk mengetahui lokasi IP : 'https://ipinfo.io/
